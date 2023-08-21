@@ -16,6 +16,7 @@ Additionally, you can register domain names via the snarkos command line or thro
 
 ## Deeds
 Deeds are the backbone of the name registration component.  Deeds are records of ownership over a given domain, and are accordingly of the Record type in Leo.  Deeds are initially produced on both public and private domain creations and serve as a way to proof of ownership even if a given domain's information is not stored on-chain.
+Many functions in zns_registry.aleo consume Deeds as a part of verifying ownership, producing new Deed records with the same information upon success.
 
 The following fields are present in a Deed:
    1. `private owner : address`: The owner of this Deed
@@ -79,20 +80,103 @@ The following fields are present in a Deed:
    
 &nbsp;
 
-## Main Functions & Transitions
+## Main Functions
 
-   1. `validate_name`: Validates a domain name. Only allow 0-9,a-z,- and _ characters.
-   2. `register`: Registers a new private domain name. This transaction support register a domain for another receiver.
-   3. `register_sub`: Registers a new private subdomain. The parent domain must be registered first and must be private domain.
-   4. `register_sub_public`: Registers a new private subdomain. The parent domain must be a public domain and owned by the caller.
-   5. `transfer_private`: Transfers the ownership of a private domain name to another address.
-   6. `transfer_public`: Transfers the ownership of a public domain name to another address.
-   7. `conver_private_to_public`: Converts a private domain to a public domain.
-   8. `conver_public_to_private`: Converts a public domain to a private domain.
-   9. `set_primary_name`: Sets the primary name of an address. The domain must be a public domain and owned by the caller.
-   10. `unset_primary_name`: Unsets the primary name of an address.
-   11. `set_resolver`: Sets the resolver for a domain name and category. The domain must be a public domain and owned by the caller.
-   12. `unset_resolver`: Unsets the resolver for a domain name and category.
+   ### create_public()
+   Register a new name publicly, storing requisite information on-chain and displaying unencrypted address.
+
+   **Parameters:**
+      
+   1. `public encoded_domain_name : domainName`: The domain name to be registered, formatted as a domainName struct
+      
+   3. `public registrar_ : u128`: The name of the .aleo program to serve as this domain's registrar, encoded as an unsigned 128-bit integer
+      
+   5. `public resolver_ : u128`: The name of the .aleo program to serve as this domain's resolver, encoded as an unsigned 128-bit integer
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing all of the information for the newly created domain.
+
+      &nbsp;
+   
+   ### create_private()
+   Register a new name private, NOT storing requisite information on-chain and only displaying encrypted address.
+
+   **Parameters:**
+      
+   1. `public encoded_domain_name : domainName`: The domain name to be registered, formatted as a domainName struct
+      
+   3. `private registrar_ : u128`: The name of the .aleo program to serve as this domain's registrar, encoded as an unsigned 128-bit integer
+      
+   5. `private resolver_ : u128`: The name of the .aleo program to serve as this domain's resolver, encoded as an unsigned 128-bit integer
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing all of the information for the newly created domain.
+      
+
+      &nbsp;
+   
+   ### update_public()
+   Update the registrar and/or resolver for a given domain, converting domain to public in the process
+
+   **Parameters:**
+      
+   1. `public registrar_ : u128`: The name of the .aleo program to set as this domain's registrar, encoded as an unsigned 128-bit integer
+      
+   5. `public resolver_ : u128`: The name of the .aleo program to set as this domain's resolver, encoded as an unsigned 128-bit integer
+
+   5. `private deed : Deed`: A deed record proving ownership of the domain that will be updated
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing all of the information for the updated domain.
+
+
+      &nbsp;
+   
+   ### update_private()
+   Update the registrar and/or resolver for a given domain, converting domain to private in the process
+
+   **Parameters:**
+      
+   1. `private registrar_ : u128`: The name of the .aleo program to set as this domain's registrar, encoded as an unsigned 128-bit integer
+      
+   5. `private resolver_ : u128`: The name of the .aleo program to set as this domain's resolver, encoded as an unsigned 128-bit integer
+
+   5. `private deed : Deed`: A deed record proving ownership of the domain that will be updated
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing all of the information for the updated domain.
+
+      &nbsp;
+   
+   ### set_Primary()
+   Sets the provided domain as the primary name for the caller/owner
+
+   **Parameters:**
+
+   1. `private deed : Deed`: A deed recording proving ownership of the domain that will be set to primary
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
+
+      &nbsp;
+   
+   ### transfer_public_to_public()
+   Transfers a public domain to another owner, maintaining public status.
+
+   **Parameters:**
+   
+   1. `public new_owner : address`: The address of the new owner
+      
+   3. `private deed : Deed`: A deed record proving ownership of the domain that will be transferred
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
 
 
 ## Challenges
