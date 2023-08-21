@@ -35,6 +35,23 @@ The following fields are present in a Deed:
        
 &nbsp;
 
+## Operator Certificates
+Operator certificates power the subdomain creation process.  Only the owner of a domain can issue operator certificates to other users.  A valid operator certificate allows a user to create subdomains for a given upper domain.
+
+For example, if Alex owns `alex.zexe` and issues an operator certificate to Bob, then Bob will be able to create subdomains such as `bob.alex.zexe` or `app.alex.zexe`.
+
+The following fields are present in an operatorCert:
+   1. `private owner : address`: The owner of this certificate
+      
+   3. `private supervisor : address`: The issuer of this certificate; this can only be the owner of the domain for now
+      
+   4. `private tld : u128`: The top level domain extension of this domain, encoded as an unsigned 128-bit integer.  Currently only .zexe is an accepted tld
+      
+   5. `private dname : u128`: The domain name, encoded as an unsigned 128-bit integer
+      
+       
+&nbsp;
+
 
 
 ## Additional Structures and Mappings
@@ -116,6 +133,50 @@ The following fields are present in a Deed:
       
 
       &nbsp;
+      
+   ### create_subdomain_public()
+   Register a new subname publicly, storing requisite information on-chain and displaying unencrypted address.
+
+   **Parameters:**
+      
+   1. `private permission : operatorCert`: An operatorCert verifying that the caller is allowed to create subdomains for the provided domain
+      
+   3. `public subname_ : u128`: The subname to be registered, encoded as an unsigned 128-bit integer
+      
+   3. `public registrar_ : u128`: The name of the .aleo program to serve as this subdomain's registrar, encoded as an unsigned 128-bit integer
+      
+   5. `public resolver_ : u128`: The name of the .aleo program to serve as this subdomain's resolver, encoded as an unsigned 128-bit integer
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing all of the information for the newly created subdomain.
+      
+   3. `new_cert : operatorCert`: Upon success, return operatorCert containing all of the same information as before.
+
+      &nbsp;
+
+   ### create_subdomain_private()
+   Register a new subname private, NOT storing requisite information on-chain and only displaying encrypted address.
+
+   **Parameters:**
+      
+   1. `private permission : operatorCert`: An operatorCert verifying that the caller is allowed to create subdomains for the provided domain
+      
+   3. `private subname_ : u128`: The subname to be registered, encoded as an unsigned 128-bit integer
+      
+   3. `private registrar_ : u128`: The name of the .aleo program to serve as this subdomain's registrar, encoded as an unsigned 128-bit integer
+      
+   5. `private resolver_ : u128`: The name of the .aleo program to serve as this subdomain's resolver, encoded as an unsigned 128-bit integer
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing all of the information for the newly created subdomain.
+      
+   3. `new_cert : operatorCert`: Upon success, return operatorCert containing all of the same information as before.
+
+
+      &nbsp;
+
    
    ### update_public()
    Update the registrar and/or resolver for a given domain, converting domain to public in the process
@@ -223,7 +284,13 @@ The following fields are present in a Deed:
    
    1. `new_deed : Deed`: Upon success, return Deed record for the new owner containing the domain information.
 
+&nbsp;
+
+
+&nbsp;
 
 ## Challenges
+
+&nbsp;
 
 ## Future Work
