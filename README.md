@@ -286,14 +286,13 @@ The following fields are present in an operatorCert:
 
 &nbsp;
 
-
-&nbsp;
-
 ## Limitations
 
 1. Currently, neither strings nor arrays/vectors are supported in Leo or in Aleo instructions, so all strings (names, subnames, program names, etc.) had to be encoded as fixed size ints.  The process for that involved mapping each character in a string to it's ASCII value, subtracting an offset, converting it to a binary string (padding it with zeros if necessary to reach 6 digits), the appending all of the binary strings together and converting it back into an integer.  In the future, it will be significantly easier and more streamlined once strings are implemented.
    
 2. Leo Wallet unfortunately does not provide the nonce when fetching records, which makes it impossible to use those records as inputs to a program.  Thus all of the functions above that take records (either Deeds or operatorCerts) as inputs are unable to be called using Leo Wallet.  This was the biggest blocker that prevented those features from being added to zns-app (zexe.domains).  In the future, if Leo Wallet or another wallet is able to query records with the full data, then those features may be implemented.  However, manually fetching records and passing them into the function via snarkOS should temporarily circumvent this issue.
+
+&nbsp;
 
 ## Future Work
 
@@ -303,6 +302,8 @@ The following fields are present in an operatorCert:
    
 5.  Support for other top-level domains (.ans) as well as information from other chains (Bitcoin, Ethereum) should be added eventually.
 
-## Acknowledgements
-
 &nbsp;
+
+## Acknowledgements
+Huge thanks to the entire Aleo team, the Demox Labs team for developing and providing the starter code for Leo Wallet, and everyone in the community who helped along the way!
+
