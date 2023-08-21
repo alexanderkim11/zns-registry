@@ -178,7 +178,50 @@ The following fields are present in a Deed:
    
    1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
 
+      &nbsp;
+   
+   ### transfer_public_to_private()
+   Transfers a public domain to another owner, converting to private status.
 
+   **Parameters:**
+   
+   1. `public new_owner : address`: The address of the new owner
+      
+   3. `private deed : Deed`: A deed record proving ownership of the domain that will be transferred
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
+
+      &nbsp;
+   
+   ### transfer_private_to_public()
+   Transfers a private domain to another owner, converting to public status.
+
+   **Parameters:**
+   
+   1. `private new_owner : address`: The address of the new owner
+      
+   3. `private deed : Deed`: A deed record proving ownership of the domain that will be transferred
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
+
+      &nbsp;
+   
+   ### transfer_private_to_private()
+   Transfers a private domain to another owner, maintaining private status.
+
+   **Parameters:**
+   
+   1. `private new_owner : address`: The address of the new owner
+      
+   3. `private deed : Deed`: A deed record proving ownership of the domain that will be transferred
+
+   **Return:**
+   
+   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
 ## Challenges
 
 ## Future Work
