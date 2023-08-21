@@ -176,7 +176,7 @@ The following fields are present in a Deed:
 
    **Return:**
    
-   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
+   1. `new_deed : Deed`: Upon success, return Deed record for the new owner containing the domain information.
 
       &nbsp;
    
@@ -191,7 +191,7 @@ The following fields are present in a Deed:
 
    **Return:**
    
-   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
+   1. `new_deed : Deed`: Upon success, return Deed record for the new owner containing the domain information.
 
       &nbsp;
    
@@ -206,7 +206,7 @@ The following fields are present in a Deed:
 
    **Return:**
    
-   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
+   1. `new_deed : Deed`: Upon success, return Deed record for the new owner containing the domain information.
 
       &nbsp;
    
@@ -221,7 +221,9 @@ The following fields are present in a Deed:
 
    **Return:**
    
-   1. `new_deed : Deed`: Upon success, return Deed containing the same domain information as prior.
+   1. `new_deed : Deed`: Upon success, return Deed record for the new owner containing the domain information.
+
+
 ## Challenges
 
 ## Future Work
