@@ -1,0 +1,12 @@
+// The program input for ans_registry/src/main.leo
+[create_domain_public]
+encoded_domain_name : domainName = domainName{tld : 1u128, name : 2u128, subname: 3u128};
+registrar : u128 = 4u128;
+resolver : u128 = 5u128;
+
+[create_domain_private]
+encoded_domain_name : domainName = domainName{tld : 1u128, name : 2u128, subname: 3u128};
+registrar : u128 = 4u128;
+resolver : u128 = 5u128;
+
+

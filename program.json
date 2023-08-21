@@ -1,0 +1,10 @@
+{
+    "program": "zns_registry_v1_3.aleo",
+    "version": "0.0.0",
+    "description": "",
+    "development": {
+        "private_key": "APrivateKey1zkpAnwNG7yZsxHBq1MppycYZf9xzbLeeuXtk2nrRuYUUwKN",
+        "address": "aleo1psak9jlee79rmau4dfgf23lxy8ymsdvwdys9eqk9cmmhksehf5psek5xmz"
+    },
+    "license": "MIT"
+}
