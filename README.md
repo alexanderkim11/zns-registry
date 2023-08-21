@@ -6,9 +6,9 @@ The biggest benefit of operating on the Aleo platform is the ability to create d
 
 ## How to Use
 ### Official Site
-[zexe.domains](zexe.domains)
+[zexe.domains](https://zexe.domains)
 ### Alternatives
-Additionally, you can register domain names via the snarkos command line or through [aleo.tools](aleo.tools)
+Additionally, you can register domain names via the snarkos command line or through [aleo.tools](https://aleo.tools)
 
 ## Structures, Mappings, and Functions
 The contract defines several data structures and functions for the name service. Here is a brief overview of the main components:
