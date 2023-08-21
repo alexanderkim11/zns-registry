@@ -4,11 +4,15 @@ Zexe Name Service is a namespace provider and resolver for Aleo.  Similar to DNS
 
 The biggest benefit of operating on the Aleo platform is the ability to create domains publicly AND privately through the power of zk-SNARKS.  By combining the power of zero-knowledge proofs with the a namespace system, ZNS enhances the user-friendliness for dApps on the network while maintaining the underlying security and privacy of Aleo.
 
+
 ## How to Use
-### Official Site
+### Official Site:
 [zexe.domains](https://zexe.domains)
-### Alternatives
+
+
+### Alternatives:
 Additionally, you can register domain names via the snarkos command line or through [aleo.tools](https://aleo.tools)
+
 
 ## Deeds
 Deeds are the backbone of the name registration component.  Deeds are records of ownership over a given domain, and are accordingly of the Record type in Leo.  Deeds are initially produced on both public and private domain creations and serve as a way to proof of ownership even if a given domain's information is not stored on-chain.
@@ -27,11 +31,13 @@ The following fields are present in a Deed:
    11. `private resolver_name : u128`: The name of the .aleo program that serves as this domain's resolver, encoded as an unsigned 128-bit integer
        
    13. `private data : field`: Additional hash data, not currently used
+       
+&nbsp;
 
 
 
 ## Additional Structures and Mappings
-   ### domainName
+   ### domainName:
    A structure to help organize the code and make things more clear
 
    **Fields:**
@@ -42,8 +48,10 @@ The following fields are present in a Deed:
       
    5. `subname : u128`: The subdomain name, encoded as an unsigned 128-bit integer
 
+&nbsp;
+
    
-   ### Domain
+   ### Domain:
    A structure to help organize the code and make things more clear
 
    **Fields:**
@@ -57,6 +65,19 @@ The following fields are present in a Deed:
    4. `resolver: u128`: The name of the .aleo program that serves as this domain's resolver, encoded as an unsigned 128-bit integer
       
    6. `owner_hidden : bool`: Whether this domain is currently set to public or private
+
+&nbsp;
+
+   ### domain_taken:
+   A mapping from a domainName struct to a bool on whether or not that domain name has been registered
+
+   ### domains:
+   A mapping from a domainName struct to a full Domain struct
+
+   ### primary_name:
+   A mapping from addresses to a primary domainName
+   
+&nbsp;
 
 ## Main Functions & Transitions
 
