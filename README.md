@@ -10,47 +10,68 @@ The biggest benefit of operating on the Aleo platform is the ability to create d
 ### Alternatives
 Additionally, you can register domain names via the snarkos command line or through [aleo.tools](https://aleo.tools)
 
-## Structures, Mappings, and Functions
-The contract defines several data structures and functions for the name service. Here is a brief overview of the main components:
+## Deeds
+Deeds are the backbone of the name registration component.  Deeds are records of ownership over a given domain, and are accordingly of the Record type in Leo.  Deeds are initially produced on both public and private domain creations and serve as a way to proof of ownership even if a given domain's information is not stored on-chain.
 
-### Data Structures
+The following fields are present in a Deed:
+   1. `private owner : address`: The owner of this Deed
+      
+   3. `private tld : u128`: The top level domain extension of this domain, encoded as an unsigned 128-bit integer.  Currently only .zexe is an accepted tld
+      
+   5. `private name : u128`: The domain name, encoded as an unsigned 128-bit integer
+      
+   7. `private subname : u128`: The subdomain name, encoded as an unsigned 128-bit integer
+      
+   9. `private registrar_name : u128`: The name of the .aleo program that serves as this domain's registrar, encoded as an unsigned 128-bit integer
+       
+   11. `private resolver_name : u128`: The name of the .aleo program that serves as this domain's resolver, encoded as an unsigned 128-bit integer
+       
+   13. `private data : field`: Additional hash data, not currently used
 
-1. `Name`: Holds the ASCII bits of a domain name. If the length of the bits is less than 512, zeros are appended at the end. The bits are then split into four parts.
-   - `data1`: The first 128 bits of the ASCII domain name
-   - `data2`: The next 128 bits of the ASCII domain name
-   - `data3`: The next 128 bits of the ASCII domain name
-   - `data4`: The last 128 bits of the ASCII domain name
-2. `TokenId`: Holds a Name struct and its parent's hash.
-3. `NFT`: A record that holds the ANS's owner, data(`TokenId`), and edition(always 0scalar).
-4. `ResolverIndex`: Holds a name_hash and its type.
-5. `BaseURI`: Includes as many data parts as necessary to encapsulate the URI. Padded with 0s at the end.
 
-### Mappings
 
-1. `names`: Maps a field (name hash) to an TokenId structure.
-2. `nft_owners`: Maps a field (name hash) to an Address. Means a public domain.
-3. `primary_names`: Maps an address to a primary name.
-4. `resolvers`: Maps a ResolverIndex structure to a field(name hash).
-5. `general_settings`: Store general settings for the contract.
-6. `toggle_settings`: Store toggle settings for the contract.
-   - initialized flag = 0b0000...0001 = 1u32
-   - minting flag = 0b0000...0010 = 2u32
-   - frozen flag = 0b0000...1000 = 8u32
+## Additional Structures and Mappings
+   ### domainName
+   A structure to help organize the code and make things more clear
 
-### Main Functions & Transitions
+   **Fields:**
+      
+   1. `tld : u128`: The top level domain extension of this domain, encoded as an unsigned 128-bit integer.  Currently only .zexe is an accepted top-level domain.
+      
+   3. `name : u128`: The domain name, encoded as an unsigned 128-bit integer
+      
+   5. `subname : u128`: The subdomain name, encoded as an unsigned 128-bit integer
 
-1. `validate_name`: Validates a domain name. Only allow 0-9,a-z,- and _ characters.
-2. `register`: Registers a new private domain name. This transaction support register a domain for another receiver.
-3. `register_sub`: Registers a new private subdomain. The parent domain must be registered first and must be private domain.
-4. `register_sub_public`: Registers a new private subdomain. The parent domain must be a public domain and owned by the caller.
-5. `transfer_private`: Transfers the ownership of a private domain name to another address.
-6. `transfer_public`: Transfers the ownership of a public domain name to another address.
-7. `conver_private_to_public`: Converts a private domain to a public domain.
-8. `conver_public_to_private`: Converts a public domain to a private domain.
-9. `set_primary_name`: Sets the primary name of an address. The domain must be a public domain and owned by the caller.
-10. `unset_primary_name`: Unsets the primary name of an address.
-11. `set_resolver`: Sets the resolver for a domain name and category. The domain must be a public domain and owned by the caller.
-12. `unset_resolver`: Unsets the resolver for a domain name and category.
+   
+   ### Domain
+   A structure to help organize the code and make things more clear
+
+   **Fields:**
+   
+   1. `current owner : address`: The owner of this Domain
+      
+   3. `name : domainName`: The domain name, wrapped inside a domainName struct (see above)
+
+   4. `registrar: u128`: The name of the .aleo program that serves as this domain's registrar, encoded as an unsigned 128-bit integer
+
+   4. `resolver: u128`: The name of the .aleo program that serves as this domain's resolver, encoded as an unsigned 128-bit integer
+      
+   6. `owner_hidden : bool`: Whether this domain is currently set to public or private
+
+## Main Functions & Transitions
+
+   1. `validate_name`: Validates a domain name. Only allow 0-9,a-z,- and _ characters.
+   2. `register`: Registers a new private domain name. This transaction support register a domain for another receiver.
+   3. `register_sub`: Registers a new private subdomain. The parent domain must be registered first and must be private domain.
+   4. `register_sub_public`: Registers a new private subdomain. The parent domain must be a public domain and owned by the caller.
+   5. `transfer_private`: Transfers the ownership of a private domain name to another address.
+   6. `transfer_public`: Transfers the ownership of a public domain name to another address.
+   7. `conver_private_to_public`: Converts a private domain to a public domain.
+   8. `conver_public_to_private`: Converts a public domain to a private domain.
+   9. `set_primary_name`: Sets the primary name of an address. The domain must be a public domain and owned by the caller.
+   10. `unset_primary_name`: Unsets the primary name of an address.
+   11. `set_resolver`: Sets the resolver for a domain name and category. The domain must be a public domain and owned by the caller.
+   12. `unset_resolver`: Unsets the resolver for a domain name and category.
 
 
 ## Challenges
