@@ -1,11 +1,13 @@
 # Welcome to Zexe Name Service (ZNS)
 
-Zexe Name Service is a namespace provider and resolver for Aleo.  Similar to DNS for Web2 or ENS for Ethereum, he function of ZNS is to map human-readable names like ‘alex.zexe’ to machine-readable identifiers such as Aleo addresses, and other metadata.  The biggest benefit of operating on the Aleo platform is the ability to create domains publicly AND privately through the power of zk-SNARKS.  By combining the power of zero-knowledge proofs with the a namespace system, ZNS enhances the user-friendliness for dApps on the network while maintaining the underlying security and privacy of Aleo.
+Zexe Name Service is a namespace provider and resolver for Aleo.  Similar to DNS for Web2 or ENS for Ethereum, he function of ZNS is to map human-readable names like ‘alex.zexe’ to machine-readable identifiers such as Aleo addresses, and other metadata.  
+
+The biggest benefit of operating on the Aleo platform is the ability to create domains publicly AND privately through the power of zk-SNARKS.  By combining the power of zero-knowledge proofs with the a namespace system, ZNS enhances the user-friendliness for dApps on the network while maintaining the underlying security and privacy of Aleo.
 
 ## How to Use
-# Official Site
+### Official Site
 [zexe.domains](zexe.domains).
-# Alternatives
+### Alternatives
 Additionally, you can register domain names via the snarkos command line or through aleo.tools.
 
 ## Structures, Mappings, and Functions
